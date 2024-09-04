@@ -1,0 +1,16 @@
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+        long sum=0;
+        for(int i=0;i<chalk.length;i++){
+            sum=sum+chalk[i];
+        }
+        int remchalks=(int)(k%sum);
+        for( int i=0;i<chalk.length;i++){
+            if (remchalks<chalk[i]){
+                return i;
+            }
+            remchalks=remchalks-chalk[i];
+        }   
+        return 0;
+    }
+}
