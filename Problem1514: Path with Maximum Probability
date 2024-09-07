@@ -1,0 +1,22 @@
+class Solution {
+    public double maxProbability(int n, int[][] edges, double[] succProb, int start_node, int end_node) {
+        double prob[]=new double[n];
+        prob[start_node]=1;
+        for (int i=0;i<n;i++){
+            int j=0;
+            for(int edge[]:edges){
+                int a=edge[0];
+                int b=edge[1];
+                double sp=succProb[j];
+                if(prob[a]* sp>prob[b]){
+                    prob[b]=prob[a]*sp;
+                }
+                 if(prob[b]* sp>prob[a]){
+                    prob[a]=prob[b]*sp;
+                }
+                j++;
+            }
+        }
+        return prob[end_node];
+    }
+}
