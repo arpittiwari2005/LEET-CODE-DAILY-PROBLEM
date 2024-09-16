@@ -1,0 +1,17 @@
+class Solution(object):
+    def findMinDifference(self, timePoints):
+        mins=[]
+        for time in timePoints:
+            h, m = map(int, time.split(':'))
+            mins.append(h * 60 + m)
+        mins.sort()
+        
+        mindiff = float('inf')
+        for i in range(len(mins) - 1):
+            mindiff = min(mindiff, mins[i + 1] - mins[i])
+        
+        mindiff = min(mindiff, 24 * 60 - mins[-1] + mins[0])
+        
+        return mindiff
+        
+        
