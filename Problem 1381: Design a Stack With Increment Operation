@@ -1,0 +1,60 @@
+class CustomStack {
+    int s[]; //stack
+    int op[];//operarion
+    int cap; //capacity
+    int size;
+    int ind; //index
+    public CustomStack(int maxSize) {
+        s=new int[maxSize];
+        op=new int [maxSize];
+        cap=maxSize;
+        size=0;
+        ind=-1;
+    }
+    
+    public void push(int x) {
+        if(isFull()){
+            return;
+        }
+        ind++;
+        size++;
+        s[ind]=x;
+    }
+    
+    public int pop() {
+        if(isEmpty()){
+            return -1;
+        }
+        int val=s[ind];
+        val+=op[ind];
+        if(ind>0){
+            op[ind-1]+=op[ind];
+        }
+        op[ind]=0;
+        ind--;
+        size--;
+        return val;
+    }
+    
+    public void increment(int k, int val) {
+     if(isEmpty()){
+        return ;
+     }   
+     int n=Math.min(size,k);
+     op[n-1]+=val;
+    }
+    private boolean isFull(){
+        return (size==cap);
+    }   
+    private boolean isEmpty(){
+        return (size==0);
+    }
+}
+
+/**
+ * Your CustomStack object will be instantiated and called as such:
+ * CustomStack obj = new CustomStack(maxSize);
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * obj.increment(k,val);
+ */
