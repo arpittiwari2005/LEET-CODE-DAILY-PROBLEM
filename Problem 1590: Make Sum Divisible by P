@@ -1,0 +1,25 @@
+class Solution(object):
+    def minSubarray(self, nums, p):
+        """
+        :type nums: List[int]
+        :type p: int
+        :rtype: int
+        """
+        total=sum(nums)
+        rem=total%p
+        if rem==0:
+            return 0
+        res=len(nums)
+        cursum=0
+        remidx={
+            0:-1
+            }
+        for i,n in enumerate(nums):
+            cursum=(cursum+n)%p
+            pre=(cursum-rem+p)%p
+            if pre in remidx:
+                length=i-remidx[pre]
+                res=min(res,length)
+            remidx[cursum]=i
+        return -1 if res==len(nums) else res
+        
