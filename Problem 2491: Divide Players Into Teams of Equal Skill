@@ -1,0 +1,30 @@
+class Solution {
+    public long dividePlayers(int[] skill) {
+        int n=skill.length;
+        int t=n/2;
+        int sum=0;
+        int freqmap[]=new int[1001];
+        for(int ele:skill){
+            freqmap[ele]++;
+            sum+=ele;
+        }
+        if(sum%t!=0){
+            return -1;
+        }
+        int tp=sum/t;
+        long res=0;
+        for(int ele:skill){
+            if(freqmap[ele]==0){
+                continue;
+            }
+            freqmap[ele]--;
+            int pn=tp-ele;
+            if(freqmap[pn]==0){
+                return -1;
+            }
+            freqmap[pn]--;
+            res=res+((long)ele*(long)pn);
+        }
+        return res;
+    }
+}
